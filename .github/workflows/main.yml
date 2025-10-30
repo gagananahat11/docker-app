@@ -2,7 +2,7 @@ name: Build and Push Docker Memory App
 
 on:
   push:
-    branches: [ main ]  # ✅ make sure correct branch
+    branches: [ main ]
 
 jobs:
   build:
@@ -10,12 +10,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build frontend with ARG
         run: |
@@ -29,8 +23,3 @@ jobs:
           docker build \
             -t myuser/docker-memory-backend:${{ github.sha }} \
             ./backend
-
-      - name: Push images
-        run: |
-          docker push myuser/docker-memory-frontend:${{ github.sha }}
-          docker push myuser/docker-memory-backend:${{ github.sha }}
