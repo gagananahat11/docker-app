@@ -1,0 +1,25 @@
+name: Build and Push Docker Memory App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build frontend with ARG
+        run: |
+          docker build \
+            -t myuser/docker-memory-frontend:${{ github.sha }} \
+            --build-arg NEXT_PUBLIC_API_URL=${{ secrets.API_URL }} \
+            ./frontend
+
+      - name: Build backend
+        run: |
+          docker build \
+            -t myuser/docker-memory-backend:${{ github.sha }} \
+            ./backend
