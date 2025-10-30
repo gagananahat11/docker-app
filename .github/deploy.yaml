@@ -2,7 +2,7 @@ name: Build and Push Docker Memory App
 
 on:
   push:
-    branches: [ master ]  # ✅ make sure correct branch
+    branches: [ main ]  # ✅ make sure correct branch
 
 jobs:
   build:
