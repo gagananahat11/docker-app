@@ -17,7 +17,7 @@ jobs:
             -t myuser/docker-memory-frontend:${{ github.sha }} \
             --build-arg NEXT_PUBLIC_API_URL=${{ secrets.API_URL }} \
             ./frontend
-
+# add
       - name: Build backend
         run: |
           docker build \
